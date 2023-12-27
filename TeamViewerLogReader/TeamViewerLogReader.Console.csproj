@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TeamViewerLogReader.Application\**" />
+    <Compile Remove="TeamViewerLogReader.Business\**" />
+    <Compile Remove="TeamViewerLogReader.Data\**" />
+    <Compile Remove="TeamViewerLogReader.Domain\**" />
+    <EmbeddedResource Remove="TeamViewerLogReader.Application\**" />
+    <EmbeddedResource Remove="TeamViewerLogReader.Business\**" />
+    <EmbeddedResource Remove="TeamViewerLogReader.Data\**" />
+    <EmbeddedResource Remove="TeamViewerLogReader.Domain\**" />
+    <None Remove="TeamViewerLogReader.Application\**" />
+    <None Remove="TeamViewerLogReader.Business\**" />
+    <None Remove="TeamViewerLogReader.Data\**" />
+    <None Remove="TeamViewerLogReader.Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

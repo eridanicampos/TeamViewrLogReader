@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TeamViewerLogReader.Business/1.0.0": {
+        "dependencies": {
+          "TeamViewerLogReader.Domain": "1.0.0"
+        },
+        "runtime": {
+          "TeamViewerLogReader.Business.dll": {}
+        }
+      },
+      "TeamViewerLogReader.Domain/1.0.0": {
+        "runtime": {
+          "TeamViewerLogReader.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TeamViewerLogReader.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TeamViewerLogReader.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

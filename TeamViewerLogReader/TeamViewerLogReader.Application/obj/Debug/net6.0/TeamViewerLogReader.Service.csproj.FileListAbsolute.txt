@@ -1,0 +1,17 @@
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Service.deps.json
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Service.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Service.pdb
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Domain.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Domain.pdb
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.csproj.AssemblyReference.cache
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.AssemblyInfoInputs.cache
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.AssemblyInfo.cs
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.csproj.CoreCompileInputs.cache
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.csproj.CopyComplete
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\refint\TeamViewerLogReader.Service.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\TeamViewerLogReader.Service.pdb
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\obj\Debug\net6.0\ref\TeamViewerLogReader.Service.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Business.dll
+C:\_Source\_RMP\TeamViewerLogReader\TeamViewerLogReader.Application\bin\Debug\net6.0\TeamViewerLogReader.Business.pdb

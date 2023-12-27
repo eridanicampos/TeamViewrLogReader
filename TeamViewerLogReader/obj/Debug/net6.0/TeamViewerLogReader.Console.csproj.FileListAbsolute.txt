@@ -1,0 +1,17 @@
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.csproj.AssemblyReference.cache
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.AssemblyInfoInputs.cache
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.AssemblyInfo.cs
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.csproj.CoreCompileInputs.cache
+C:\_Source\_RMP\TeamViewerLogReader\bin\Debug\net6.0\TeamViewerLogReader.Console.exe
+C:\_Source\_RMP\TeamViewerLogReader\bin\Debug\net6.0\TeamViewerLogReader.Console.deps.json
+C:\_Source\_RMP\TeamViewerLogReader\bin\Debug\net6.0\TeamViewerLogReader.Console.runtimeconfig.json
+C:\_Source\_RMP\TeamViewerLogReader\bin\Debug\net6.0\TeamViewerLogReader.Console.dll
+C:\_Source\_RMP\TeamViewerLogReader\bin\Debug\net6.0\TeamViewerLogReader.Console.pdb
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.dll
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\refint\TeamViewerLogReader.Console.dll
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.pdb
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.genruntimeconfig.cache
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\ref\TeamViewerLogReader.Console.dll
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.WinFormsApp.Form1.resources
+C:\_Source\_RMP\TeamViewerLogReader\obj\Debug\net6.0\TeamViewerLogReader.Console.csproj.GenerateResource.cache

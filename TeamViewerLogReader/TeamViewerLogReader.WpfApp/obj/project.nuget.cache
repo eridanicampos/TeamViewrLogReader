@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Rgrvbj58/rdCRKFxHYGvCe+gyxWV+7Y+BpQErNcdu7QasyqRSpkOgIdGpBPd8btUqVfW9VEM8coQlfT5UL75Uw==",
+  "success": true,
+  "projectFilePath": "C:\\_Source\\_RMP\\TeamViewerLogReader\\TeamViewerLogReader.WpfApp\\TeamViewerLogReader.WpfApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Eridani\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Eridani\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Eridani\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Eridani\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.16\\microsoft.netcore.app.host.win-x64.6.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
