@@ -49,9 +49,9 @@ Thumbs.db
 *.wmv
 
 .vs
-obj/Debug
-/TeamViewerLogReader/TeamViewerLogReader.Business/obj
-/TeamViewerLogReader/TeamViewerLogReader.Application/obj
-/TeamViewerLogReader/TeamViewerLogReader.ConsoleApp/obj/Debug/net6.0
-/TeamViewerLogReader/TeamViewerLogReader.Domain/obj
-/TeamViewerLogReader/TeamViewerLogReader.WinFormsApp/obj
+obj/
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/
+/TeamViewerLogReader/TeamViewerLogReader.ConsoleApp/obj/
+/TeamViewerLogReader/TeamViewerLogReader.Domain/obj/
+/TeamViewerLogReader/TeamViewerLogReader.WinFormsApp/obj/
