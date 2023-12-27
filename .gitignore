@@ -1,0 +1,22 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/TeamViewerLogReader/.vs/TeamViewerLogReader/DesignTimeBuild/.dtbcache.v2
+/TeamViewerLogReader/.vs/TeamViewerLogReader/FileContentIndex/ff225dc3-40a4-4929-be96-138d6c31a466.vsidx
+/TeamViewerLogReader/.vs/TeamViewerLogReader/FileContentIndex/edeaa328-db3a-4feb-96d9-a25b0e507ccd.vsidx
+/TeamViewerLogReader/.vs/TeamViewerLogReader/FileContentIndex/876b1569-f986-4309-b639-722700629023.vsidx
+/TeamViewerLogReader/.vs/TeamViewerLogReader/FileContentIndex/352b28cf-66fa-469a-9e2c-9ae39e3e1256.vsidx
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/Debug/net6.0/TeamViewerLogReader.Service.csproj.AssemblyReference.cache
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/Debug/net6.0/TeamViewerLogReader.Service.GeneratedMSBuildEditorConfig.editorconfig
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/Debug/net6.0/TeamViewerLogReader.Service.assets.cache
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/Debug/net6.0/TeamViewerLogReader.Business.GeneratedMSBuildEditorConfig.editorconfig
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/Debug/net6.0/TeamViewerLogReader.Business.csproj.AssemblyReference.cache
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/Debug/net6.0/TeamViewerLogReader.Business.assets.cache
+/TeamViewerLogReader/.vs/TeamViewerLogReader/v17/.suo
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/TeamViewerLogReader.Service.csproj.nuget.dgspec.json
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/project.nuget.cache
+/TeamViewerLogReader/TeamViewerLogReader.Application/obj/project.assets.json
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/project.assets.json
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/project.nuget.cache
+/TeamViewerLogReader/TeamViewerLogReader.Business/obj/TeamViewerLogReader.Business.csproj.nuget.dgspec.json
