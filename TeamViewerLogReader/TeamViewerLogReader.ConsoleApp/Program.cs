@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using TeamViewerLogReader.Business;
 using TeamViewerLogReader.Business.Interfaces;
 using TeamViewerLogReader.ConsoleApp;
@@ -19,6 +20,9 @@ public class Program
 
         var services = new ServiceCollection();
         ConfigureServices(services, configuration);
+
+        AddApplicationToStartup();
+
         var serviceProvider = services.BuildServiceProvider();
         var logMonitor = serviceProvider.GetService<LogMonitor>();
         logMonitor.MonitorLogFile();
@@ -34,5 +38,16 @@ public class Program
         services.AddTransient<IUserTvLogRepository, UserTvLogRepository>();
         services.AddSingleton(new DataContext(configuration.GetConnectionString("DefaultConnection")));
         services.AddTransient<LogMonitor>();
+    }
+
+    private static void AddApplicationToStartup()
+    {
+        string appName = "TeamViewerLogReader.ConsoleApp";
+        string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+        using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+        {
+            key.SetValue(appName, $"\"{appPath}\"");
+        }
     }
 }

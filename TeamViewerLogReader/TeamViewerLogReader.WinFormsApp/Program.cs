@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using System.Data.SqlClient;
 using TeamViewerLogReader.Domain.Repositories;
+using Microsoft.Win32;
 
 namespace TeamViewerLogReader.WinFormsApp
 {
@@ -29,6 +30,8 @@ namespace TeamViewerLogReader.WinFormsApp
             ConfigureServices(services, configuration);
             var serviceProvider = services.BuildServiceProvider();
 
+            AddApplicationToStartup();
+
             ApplicationConfiguration.Initialize();
             using (var scope = serviceProvider.CreateScope())
             {
@@ -48,6 +51,17 @@ namespace TeamViewerLogReader.WinFormsApp
             services.AddSingleton(new DataContext(configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<Form1>();
             services.AddTransient<AdminUser>();
+        }
+
+        private static void AddApplicationToStartup()
+        {
+            string appName = "TeamViewerLogReader.WinFormsApp";
+            string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            {
+                key.SetValue(appName, $"\"{appPath}\"");
+            }
         }
     }
 }
