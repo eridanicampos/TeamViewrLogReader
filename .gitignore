@@ -55,3 +55,8 @@ obj/
 /TeamViewerLogReader/TeamViewerLogReader.ConsoleApp/obj/
 /TeamViewerLogReader/TeamViewerLogReader.Domain/obj/
 /TeamViewerLogReader/TeamViewerLogReader.WinFormsApp/obj/
+/TeamViewerLogReader/TeamViewerLogReader.WinFormsApp/Properties/PublishProfiles
+/TeamViewerLogReader/TeamViewerLogReader.Domain/bin/Release/net6.0
+/TeamViewerLogReader/TeamViewerLogReader.Data/bin/Release/net6.0
+/TeamViewerLogReader/TeamViewerLogReader.Business/bin/Release/net6.0
+/TeamViewerLogReader/TeamViewerLogReader.Application/bin/Release/net6.0
