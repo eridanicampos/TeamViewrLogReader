@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TeamViewerLogReader.Application\TeamViewerLogReader.Service.csproj" />
     <ProjectReference Include="..\TeamViewerLogReader.Data\TeamViewerLogReader.Data.csproj" />
+    <ProjectReference Include="..\TeamViewerLogReader.Log\TeamViewerLogReader.Log.csproj" />
   </ItemGroup>
 
   <ItemGroup>

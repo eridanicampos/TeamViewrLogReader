@@ -7,6 +7,7 @@ using TeamViewerLogReader.Service.Interfaces;
 using TeamViewerLogReader.Domain;
 using TeamViewerLogReader.Business.Interfaces;
 using TeamViewerLogReader.Service.DTOs;
+using TeamViewerLogReader.Business;
 
 namespace TeamViewerLogReader.Service
 {
@@ -31,19 +32,7 @@ namespace TeamViewerLogReader.Service
 
         public UserTvLog Login(LoginDTO loginDto)
         {
-            string storedHash = _business.GetUserHashedPassword(loginDto.Login);
-            if (storedHash == null)
-            {
-                throw new InvalidOperationException("User not found or password not set");
-            }
-
-            var boolVerify = PasswordHasher.VerifyPassword(storedHash, loginDto.Password);
-            if (!boolVerify)
-            {
-                throw new InvalidOperationException("User not found or password not set");
-            }
-
-            return _business.Login(new UserTvLog() { Username = loginDto.Login, PasswordHash = storedHash });
+            return _business.Login(new UserTvLog() { Username = loginDto.Login, PasswordHash = loginDto.Password });
         }
 
         public UserTvLog Update(UserTvLog user)

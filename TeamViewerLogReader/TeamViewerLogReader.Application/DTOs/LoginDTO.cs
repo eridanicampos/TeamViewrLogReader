@@ -11,11 +11,6 @@ namespace TeamViewerLogReader.Service.DTOs
         public string Login { get; set; }
         public string Password { get; set; }
 
-
-        public string HashPassword()
-        {
-            return PasswordHasher.HashPassword(this.Password);
-        }
     }
 
 

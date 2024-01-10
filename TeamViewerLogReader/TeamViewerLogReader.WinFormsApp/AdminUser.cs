@@ -64,7 +64,7 @@ namespace TeamViewerLogReader.WinFormsApp
                 Company = txt_Company.Text,
                 Name = txt_FullName.Text,
                 Surname = txt_Surname.Text,
-                PasswordHash = PasswordHasher.HashPassword(txt_Password.Text),
+                PasswordHash = txt_Password.Text,
                 PhoneNumber = txt_Phone.Text,
                 Position = txt_Position.Text,
                 Username = txt_Username.Text,
@@ -81,7 +81,7 @@ namespace TeamViewerLogReader.WinFormsApp
             _user.Company = txt_Company.Text;
             _user.Name = txt_FullName.Text;
             _user.Surname = txt_Surname.Text;
-            _user.PasswordHash = (txt_Password.Text != string.Empty) ? PasswordHasher.HashPassword(txt_Password.Text) : _user.PasswordHash;
+            _user.PasswordHash = (txt_Password.Text != string.Empty) ? txt_Password.Text : _user.PasswordHash;
             _user.PhoneNumber = txt_Phone.Text;
             _user.Position = txt_Position.Text;
             _user.Username = txt_Username.Text;

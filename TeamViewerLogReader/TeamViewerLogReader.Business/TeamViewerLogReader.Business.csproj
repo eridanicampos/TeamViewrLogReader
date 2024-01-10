@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TeamViewerLogReader.Domain\TeamViewerLogReader.Domain.csproj" />
+    <ProjectReference Include="..\TeamViewerLogReader.Log\TeamViewerLogReader.Log.csproj" />
   </ItemGroup>
 
 </Project>

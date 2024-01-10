@@ -7,25 +7,43 @@ using TeamViewerLogReader.ConsoleApp;
 using TeamViewerLogReader.Data.Context;
 using TeamViewerLogReader.Data.Repositories;
 using TeamViewerLogReader.Domain.Repositories;
+using TeamViewerLogReader.Log;
+using TeamViewerLogReader.Log.Interfaces;
 using TeamViewerLogReader.Service;
 using TeamViewerLogReader.Service.Interfaces;
 public class Program
 {
     static void Main()
     {
-        var builder = new ConfigurationBuilder()
+        var logger = NLog.LogManager.GetCurrentClassLogger();
+        try
+        {
+            var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-        var configuration = builder.Build();
+            var configuration = builder.Build();
 
-        var services = new ServiceCollection();
-        ConfigureServices(services, configuration);
+            var services = new ServiceCollection();
+            ConfigureServices(services, configuration);
 
-        AddApplicationToStartup();
+            AddApplicationToStartup();
 
-        var serviceProvider = services.BuildServiceProvider();
-        var logMonitor = serviceProvider.GetService<LogMonitor>();
-        logMonitor.MonitorLogFile();
+            var serviceProvider = services.BuildServiceProvider();
+            var logMonitor = serviceProvider.GetService<LogMonitor>();
+            logMonitor.MonitorLogFile();
+        }
+        catch (Exception ex)
+        {
+            // Log exceptions
+            logger.Error(ex, "Error starting the application");
+            throw;
+        }
+        finally
+        {
+            // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
+            NLog.LogManager.Shutdown();
+        }
+        
 
     }
     private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
@@ -36,10 +54,11 @@ public class Program
         services.AddTransient<IUserTvLogService, UserTvLogService>();
         services.AddTransient<IUserTvLogBusiness, UserTvLogBusiness>();
         services.AddTransient<IUserTvLogRepository, UserTvLogRepository>();
+        services.AddTransient<ILoggerService, NLogService>();
         services.AddSingleton(new DataContext(configuration.GetConnectionString("DefaultConnection")));
         services.AddTransient<LogMonitor>();
     }
-
+        
     private static void AddApplicationToStartup()
     {
         string appName = "TeamViewerLogReader.ConsoleApp";

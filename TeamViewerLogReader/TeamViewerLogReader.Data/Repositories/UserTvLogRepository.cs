@@ -128,23 +128,88 @@ namespace TeamViewerLogReader.Data.Repositories
 
         public string GetUserHashedPassword(string username)
         {
-            string query = "SELECT PasswordHash FROM UserTvLog WHERE Username = @Username;";
+            try
+            {
+                string query = "SELECT PasswordHash FROM UserTvLog WHERE Username = @Username;";
+
+                using (var command = new SqlCommand(query, _context.Connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader.GetString(reader.GetOrdinal("PasswordHash"));
+                        }
+                    }
+                }
+
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        public void RegisterLogin(UserLoginHistory userLoginHistory)
+        {
+            string query = @"INSERT INTO UserLoginHistory (UserTvLogId, ComputerName, IpAddress, LoginTimestamp)
+                            VALUES (@UserTvLogId, @ComputerName, @IpAddress, @LoginTimestamp);";
 
             using (var command = new SqlCommand(query, _context.Connection))
             {
-                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@UserTvLogId", userLoginHistory.UserTvLogId);
+                command.Parameters.AddWithValue("@ComputerName", userLoginHistory.ComputerName);
+                command.Parameters.AddWithValue("@IpAddress", userLoginHistory.IpAddress);
+                command.Parameters.AddWithValue("@LoginTimestamp", userLoginHistory.LoginTimestamp);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public UserTvLog CheckLastLogin(string computerName, string ipAddress)
+        {
+            UserTvLog lastUser = null;
+
+            string query = @"
+                            SELECT TOP 1 U.*
+                            FROM UserLoginHistory ULH
+                            INNER JOIN UserTvLog U ON ULH.UserTvLogId = U.Id
+                            WHERE ULH.ComputerName = @ComputerName AND ULH.IpAddress = @IpAddress
+                            ORDER BY ULH.LoginTimestamp DESC";
+
+            using (var command = new SqlCommand(query, _context.Connection))
+            {
+                command.Parameters.AddWithValue("@ComputerName", computerName);
+                command.Parameters.AddWithValue("@IpAddress", ipAddress);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        return reader.GetString(reader.GetOrdinal("PasswordHash"));
+                        lastUser = new UserTvLog
+                        {
+                            Id = reader.GetGuid(reader.GetOrdinal("Id")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            PasswordHash = reader.GetString(reader.GetOrdinal("PasswordHash")),
+                            PhoneNumber = reader.IsDBNull(reader.GetOrdinal("PhoneNumber")) ? null : reader.GetString(reader.GetOrdinal("PhoneNumber")),
+                            Username = reader.GetString(reader.GetOrdinal("Username")),
+                            DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
+                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted")),
+                            Company = reader.IsDBNull(reader.GetOrdinal("Company")) ? null : reader.GetString(reader.GetOrdinal("Company")),
+                            Position = reader.IsDBNull(reader.GetOrdinal("Position")) ? null : reader.GetString(reader.GetOrdinal("Position")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Surname = reader.GetString(reader.GetOrdinal("Surname"))
+                        };
                     }
                 }
             }
 
-            return null;
+            return lastUser;
         }
-
     }
 }

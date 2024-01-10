@@ -13,5 +13,7 @@ namespace TeamViewerLogReader.Domain.Repositories
         UserTvLog Create(UserTvLog user);
 
         string GetUserHashedPassword(string username);
+        void RegisterLogin(UserLoginHistory userLoginHistory);
+        UserTvLog CheckLastLogin(string computerName, string ipAddress);
     }
 }

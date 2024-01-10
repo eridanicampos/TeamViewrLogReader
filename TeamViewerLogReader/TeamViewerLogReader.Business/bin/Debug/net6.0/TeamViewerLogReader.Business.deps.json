@@ -8,15 +8,32 @@
     ".NETCoreApp,Version=v6.0": {
       "TeamViewerLogReader.Business/1.0.0": {
         "dependencies": {
-          "TeamViewerLogReader.Domain": "1.0.0"
+          "TeamViewerLogReader.Domain": "1.0.0",
+          "TeamViewerLogReader.Log": "1.0.0"
         },
         "runtime": {
           "TeamViewerLogReader.Business.dll": {}
         }
       },
+      "NLog/5.2.8": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.8.2366"
+          }
+        }
+      },
       "TeamViewerLogReader.Domain/1.0.0": {
         "runtime": {
           "TeamViewerLogReader.Domain.dll": {}
+        }
+      },
+      "TeamViewerLogReader.Log/1.0.0": {
+        "dependencies": {
+          "NLog": "5.2.8"
+        },
+        "runtime": {
+          "TeamViewerLogReader.Log.dll": {}
         }
       }
     }
@@ -27,7 +44,19 @@
       "serviceable": false,
       "sha512": ""
     },
+    "NLog/5.2.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jAIELkWBs1CXFPp986KSGpDFQZHCFccO+LMbKBTTNm42KifaI1mYzFMFQQfuGmGMTrCx0TFPhDjHDE4cLAZWiQ==",
+      "path": "nlog/5.2.8",
+      "hashPath": "nlog.5.2.8.nupkg.sha512"
+    },
     "TeamViewerLogReader.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TeamViewerLogReader.Log/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

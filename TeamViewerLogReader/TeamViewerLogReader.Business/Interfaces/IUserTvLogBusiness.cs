@@ -13,5 +13,7 @@ namespace TeamViewerLogReader.Business.Interfaces
         UserTvLog Update(UserTvLog user);
         UserTvLog Create(UserTvLog user);
         string GetUserHashedPassword(string username);
+        UserTvLog CheckLastLogin();
+        UserTvLog? CreateDefaultUser();
     }
 }

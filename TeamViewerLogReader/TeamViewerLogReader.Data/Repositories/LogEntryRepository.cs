@@ -16,9 +16,9 @@ namespace TeamViewerLogReader.Data.Repositories
 
         public TeamViewerLogEntry AddLogEntry(TeamViewerLogEntry entry)
         {
-            string query = "INSERT INTO TeamViewerLogEntry (Timestamp, ProcessId, ThreadId, LogLevel, Message) " +
+            string query = "INSERT INTO TeamViewerLogEntry (Timestamp, ProcessId, ThreadId, LogLevel, Message, UserTvLogId) " +
                            "OUTPUT INSERTED.ID " +
-                           "VALUES (@Timestamp, @ProcessId, @ThreadId, @LogLevel, @Message);";
+                           "VALUES (@Timestamp, @ProcessId, @ThreadId, @LogLevel, @Message, @UserTvLogId);";
 
             using (var command = new SqlCommand(query, _context.Connection))
             {
@@ -27,6 +27,7 @@ namespace TeamViewerLogReader.Data.Repositories
                 command.Parameters.AddWithValue("@ThreadId", entry.ThreadId);
                 command.Parameters.AddWithValue("@LogLevel", entry.LogLevel);
                 command.Parameters.AddWithValue("@Message", entry.Message);
+                command.Parameters.AddWithValue("@UserTvLogId", entry.UserTvLogId);
 
                 entry.Id = (int)command.ExecuteScalar();
             }

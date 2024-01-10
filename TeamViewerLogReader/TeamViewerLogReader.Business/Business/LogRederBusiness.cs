@@ -2,28 +2,59 @@
 using TeamViewerLogReader.Business.Interfaces;
 using TeamViewerLogReader.Domain;
 using TeamViewerLogReader.Domain.Repositories;
+using TeamViewerLogReader.Log.Interfaces;
 
 namespace TeamViewerLogReader.Business
 {
     public class LogRederBusiness : ILogRederBusiness
     {
+        private readonly ILoggerService _logger;
+
         const string baseDir = @"C:\Program Files\TeamViewer";
         private readonly ILogEntryRepository _repository;
-
-        public LogRederBusiness(ILogEntryRepository repository)
+        private readonly IUserTvLogBusiness _businessUser;
+        public LogRederBusiness(ILogEntryRepository repository, IUserTvLogBusiness businessUser, ILoggerService logger)
         {
             _repository = repository;
+            _businessUser = businessUser;
+            _logger = logger;
+
         }
         public List<TeamViewerLogEntry> ReadLog()
         {
-            string path = FindLogFilePath();
-            List<TeamViewerLogEntry> lstLogTV = new List<TeamViewerLogEntry>();
+            try
+            {
+                UserTvLog user = new UserTvLog();
+                _logger.LogInformation("Start - FindLogFilePath");
+                string path = FindLogFilePath();
 
-            CheckExistingLogs(path, lstLogTV);
-            CheckUpdateFileLog(path);
+                _logger.LogInformation("Start - path name - " + path);
+                List<TeamViewerLogEntry> lstLogTV = new List<TeamViewerLogEntry>();
 
-            return lstLogTV;
+                _logger.LogInformation("Check Last Login");
+                user = _businessUser.CheckLastLogin();
+                if (user != null)
+                {
+                    _logger.LogInformation("Found user");
+                }
+                else
+                {
+                    user = _businessUser.CreateDefaultUser();
+                }
+                CheckExistingLogs(path, lstLogTV, user);
+                CheckUpdateFileLog(path);
+
+                return lstLogTV;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("An error occurred in the ReadLog method.", ex);
+
+                throw ex;
+            }
+            
         }
+
 
         private void CheckUpdateFileLog(string path)
         {
@@ -48,13 +79,14 @@ namespace TeamViewerLogReader.Business
             }
         }
 
-        private void CheckExistingLogs(string path, List<TeamViewerLogEntry> lstLogTV)
+        private void CheckExistingLogs(string path, List<TeamViewerLogEntry> lstLogTV, UserTvLog user)
         {
             lstLogTV.AddRange(ReadLogFile(path));
-            if (lstLogTV.Count > 0)
-            {
+            if (lstLogTV != null && lstLogTV.Count>0)
+            {            
                 foreach (var item in lstLogTV)
                 {
+                    item.UserTvLogId = user.Id;
                     if (!_repository.LogEntryExists(item))
                     {
                         _repository.AddLogEntries(lstLogTV);
