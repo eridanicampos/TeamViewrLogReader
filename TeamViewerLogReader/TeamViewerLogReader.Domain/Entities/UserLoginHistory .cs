@@ -19,8 +19,12 @@ namespace TeamViewerLogReader.Domain
 
         [Required]
         public DateTime LoginTimestamp { get; set; }
+        [StringLength(255)]
+        public string MacAddress { get; set; }
 
         [ForeignKey("UserTvLogId")]
         public virtual UserTvLog UserTvLog { get; set; }
+
+        
     }
 }

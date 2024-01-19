@@ -48,14 +48,17 @@ public class Program
     }
     private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton(new DataContext(configuration.GetConnectionString("DefaultConnection")));
+        services.AddSingleton(new ClickHouseDataContext(configuration.GetConnectionString("ClickHouseConnection")));
         services.AddTransient<ILogRederService, LogRederService>();
         services.AddTransient<ILogRederBusiness, LogRederBusiness>();
         services.AddTransient<ILogEntryRepository, LogEntryRepository>();
+        services.AddTransient<ILogEntryRepositoryClickHouse, LogEntryRepositoryClickHouse>();
         services.AddTransient<IUserTvLogService, UserTvLogService>();
         services.AddTransient<IUserTvLogBusiness, UserTvLogBusiness>();
         services.AddTransient<IUserTvLogRepository, UserTvLogRepository>();
         services.AddTransient<ILoggerService, NLogService>();
-        services.AddSingleton(new DataContext(configuration.GetConnectionString("DefaultConnection")));
+
         services.AddTransient<LogMonitor>();
     }
         

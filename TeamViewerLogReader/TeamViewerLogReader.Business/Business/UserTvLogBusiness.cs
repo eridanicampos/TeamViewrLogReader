@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using TeamViewerLogReader.Business.Interfaces;
 using TeamViewerLogReader.Domain;
 using TeamViewerLogReader.Domain.Repositories;
+using System.Net.NetworkInformation;
 
 namespace TeamViewerLogReader.Business
 {
@@ -19,7 +20,7 @@ namespace TeamViewerLogReader.Business
         public UserTvLog Create(UserTvLog user)
         {
             var userDefault = CheckLastLogin();
-            if (userDefault != null)
+            if (userDefault != null )
             {
                 userDefault.Name = user.Name;
                 userDefault.Surname = user.Surname;
@@ -32,7 +33,10 @@ namespace TeamViewerLogReader.Business
                 userDefault.PasswordHash = PasswordHasher.HashPassword(user.PasswordHash);
                 return _repository.Update(userDefault);
             }
-            user.PasswordHash = PasswordHasher.HashPassword(user.PasswordHash);
+            else
+            {
+                user.PasswordHash = PasswordHasher.HashPassword(user.PasswordHash);
+            }
             return _repository.Create(user);
         }
 
@@ -52,16 +56,20 @@ namespace TeamViewerLogReader.Business
             }
             userTvLog.PasswordHash = storedHash;
             var objUser = _repository.Login(userTvLog);
-            string computerName = System.Environment.MachineName;
 
-            _repository.RegisterLogin(new UserLoginHistory() 
-                                        {   ComputerName = computerName ,
-                                            IpAddress = HelperBusiness.GetLocalIPAddress(),
-                                            LoginTimestamp = DateTime.Now, 
-                                            UserTvLogId = objUser.Id});
+            _repository.RegisterLogin(new UserLoginHistory()
+            {
+                ComputerName = System.Environment.MachineName,
+                IpAddress = HelperBusiness.GetLocalIPAddress(),
+                LoginTimestamp = DateTime.Now,
+                MacAddress = HelperBusiness.GetMacAddress(),
+                UserTvLogId = objUser.Id
+            });
 
             return objUser;
         }
+
+
 
         public UserTvLog Update(UserTvLog user)
         {
@@ -77,13 +85,13 @@ namespace TeamViewerLogReader.Business
         {
             string computerName = System.Environment.MachineName;
             string ipAddress = HelperBusiness.GetLocalIPAddress();
-
-            return _repository.CheckLastLogin(computerName, ipAddress);
+            string macAddress = HelperBusiness.GetMacAddress();
+            return _repository.CheckLastLogin(computerName, ipAddress, macAddress);
         }
 
         public UserTvLog? CreateDefaultUser()
         {
-            return new UserTvLog()
+            var userDefault = new UserTvLog()
             {
                 Name = "Default",
                 Surname = "Surname Default",
@@ -91,6 +99,25 @@ namespace TeamViewerLogReader.Business
                 Username = "Default",
                 PasswordHash = PasswordHasher.HashPassword("ChangeMe!")
             };
+
+            _repository.Create(userDefault);
+
+            string computerName = System.Environment.MachineName;
+            string ipAddress = HelperBusiness.GetLocalIPAddress();
+            string macAddress = HelperBusiness.GetMacAddress();
+
+            var userLoginHistoryDefault = new UserLoginHistory()
+            {
+                UserTvLogId = userDefault.Id,
+                ComputerName = computerName,
+                IpAddress = ipAddress,
+                LoginTimestamp = DateTime.Now,
+                MacAddress = macAddress,
+                UserTvLog = userDefault
+            };
+
+            _repository.RegisterLogin(userLoginHistoryDefault);
+            return userDefault;
         }
     }
 }

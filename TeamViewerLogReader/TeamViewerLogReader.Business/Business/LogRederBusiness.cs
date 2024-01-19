@@ -11,9 +11,9 @@ namespace TeamViewerLogReader.Business
         private readonly ILoggerService _logger;
 
         const string baseDir = @"C:\Program Files\TeamViewer";
-        private readonly ILogEntryRepository _repository;
+        private readonly ILogEntryRepositoryClickHouse _repository;
         private readonly IUserTvLogBusiness _businessUser;
-        public LogRederBusiness(ILogEntryRepository repository, IUserTvLogBusiness businessUser, ILoggerService logger)
+        public LogRederBusiness(ILogEntryRepositoryClickHouse repository, IUserTvLogBusiness businessUser, ILoggerService logger)
         {
             _repository = repository;
             _businessUser = businessUser;
@@ -83,10 +83,10 @@ namespace TeamViewerLogReader.Business
         {
             lstLogTV.AddRange(ReadLogFile(path));
             if (lstLogTV != null && lstLogTV.Count>0)
-            {            
+            {
+                lstLogTV.ForEach(log => log.UserTvLogId = user.Id);
                 foreach (var item in lstLogTV)
                 {
-                    item.UserTvLogId = user.Id;
                     if (!_repository.LogEntryExists(item))
                     {
                         _repository.AddLogEntries(lstLogTV);

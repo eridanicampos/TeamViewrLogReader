@@ -157,21 +157,22 @@ namespace TeamViewerLogReader.Data.Repositories
 
         public void RegisterLogin(UserLoginHistory userLoginHistory)
         {
-            string query = @"INSERT INTO UserLoginHistory (UserTvLogId, ComputerName, IpAddress, LoginTimestamp)
-                            VALUES (@UserTvLogId, @ComputerName, @IpAddress, @LoginTimestamp);";
+            string query = @"INSERT INTO UserLoginHistory (UserTvLogId, ComputerName, IpAddress, MacAddress, LoginTimestamp )
+                            VALUES (@UserTvLogId, @ComputerName, @IpAddress, @MacAddress, @LoginTimestamp);";
 
             using (var command = new SqlCommand(query, _context.Connection))
             {
                 command.Parameters.AddWithValue("@UserTvLogId", userLoginHistory.UserTvLogId);
                 command.Parameters.AddWithValue("@ComputerName", userLoginHistory.ComputerName);
                 command.Parameters.AddWithValue("@IpAddress", userLoginHistory.IpAddress);
+                command.Parameters.AddWithValue("@MacAddress", userLoginHistory.MacAddress);
                 command.Parameters.AddWithValue("@LoginTimestamp", userLoginHistory.LoginTimestamp);
 
                 command.ExecuteNonQuery();
             }
         }
 
-        public UserTvLog CheckLastLogin(string computerName, string ipAddress)
+        public UserTvLog CheckLastLogin(string computerName, string ipAddress, string macAddress)
         {
             UserTvLog lastUser = null;
 
@@ -179,13 +180,14 @@ namespace TeamViewerLogReader.Data.Repositories
                             SELECT TOP 1 U.*
                             FROM UserLoginHistory ULH
                             INNER JOIN UserTvLog U ON ULH.UserTvLogId = U.Id
-                            WHERE ULH.ComputerName = @ComputerName AND ULH.IpAddress = @IpAddress
+                            WHERE ULH.ComputerName = @ComputerName AND ULH.IpAddress = @IpAddress AND ULH.MacAddress = @MacAddress
                             ORDER BY ULH.LoginTimestamp DESC";
 
             using (var command = new SqlCommand(query, _context.Connection))
             {
                 command.Parameters.AddWithValue("@ComputerName", computerName);
                 command.Parameters.AddWithValue("@IpAddress", ipAddress);
+                command.Parameters.AddWithValue("@MacAddress", macAddress);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamViewerLogReader.Console
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TeamViewerLogReader.SetupProject", "TeamViewerLogReader.SetupProject\TeamViewerLogReader.SetupProject.vdproj", "{179F75C5-DF05-42AD-91A4-4E8643C9255F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamViewerLogReader.Log", "TeamViewerLogReader.Log\TeamViewerLogReader.Log.csproj", "{47950DC7-C2D2-4A0C-A4BC-F77560E20DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamViewerLogReader.Log", "TeamViewerLogReader.Log\TeamViewerLogReader.Log.csproj", "{47950DC7-C2D2-4A0C-A4BC-F77560E20DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -61,6 +61,7 @@ namespace TeamViewerLogReader.Data.Context
                     ComputerName NVARCHAR(255),
                     IpAdress NVARCHAR(255),
                     LoginTimestamp DATETIME NOT NULL,
+                    MacAddress NVARCHAR(255),
                     FOREIGN KEY (UserTvLogId) REFERENCES UserTvLog(Id)
                 );
             END;
