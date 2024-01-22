@@ -89,8 +89,7 @@ namespace TeamViewerLogReader.Business
                 {
                     if (!_repository.LogEntryExists(item))
                     {
-                        _repository.AddLogEntries(lstLogTV);
-                        break;
+                        _repository.AddLogEntry(item);
                     }
                     else
                     {

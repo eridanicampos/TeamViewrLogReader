@@ -16,19 +16,35 @@ namespace TeamViewerLogReader.Data.Repositories
 
         public TeamViewerLogEntry AddLogEntry(TeamViewerLogEntry entry)
         {
-            string query = @$"INSERT INTO cyberenergia_dev.teamViewerLogEntry (timestamp, processId, threadId, logLevel, message, userTvLogId) 
-                           VALUES (toDate('{entry.Timestamp}'), {entry.ProcessId}, {entry.ThreadId}, '{ entry.LogLevel}', '{entry.Message}', '{entry.UserTvLogId}');";
-
-            using (var command = new ClickHouseCommand(_context.Connection, query))
+            try
             {
-                //command.Parameters.Add("@Timestamp", entry.Timestamp);
-                //command.Parameters.Add("@ProcessId", entry.ProcessId);
-                //command.Parameters.Add("@ThreadId", entry.ThreadId);
-                //command.Parameters.Add("@LogLevel", entry.LogLevel);
-                //command.Parameters.Add("@Message", entry.Message);
-                //command.Parameters.Add("@UserTvLogId", entry.UserTvLogId);
+                var message = entry.Message.Replace("'", "\'");
 
-                command.ExecuteNonQuery();
+                string query = @$"INSERT INTO cyberenergia_dev.teamViewerLogEntry (timestamp, processId, threadId, logLevel, message, userTvLogId) 
+                           VALUES (toDate('{entry.Timestamp}'), {entry.ProcessId}, {entry.ThreadId}, '{entry.LogLevel}', '{message}', '{entry.UserTvLogId}');";
+
+                //string query = @"INSERT INTO cyberenergia_dev.teamViewerLogEntry 
+                //     (timestamp, processId, threadId, logLevel, message, userTvLogId) 
+                //     VALUES (toDate('@Timestamp'), @ProcessId, @ThreadId, @LogLevel, @Message, @UserTvLogId);";
+
+
+
+                using (var command = new ClickHouseCommand(_context.Connection, query))
+                {
+                    //command.Parameters.Add("@Timestamp", entry.Timestamp);
+                    //command.Parameters.Add("@ProcessId", entry.ProcessId);
+                    //command.Parameters.Add("@ThreadId", entry.ThreadId);
+                    //command.Parameters.Add("@LogLevel", entry.LogLevel);
+                    //command.Parameters.Add("@Message", entry.Message);
+                    //command.Parameters.Add("@UserTvLogId", entry.UserTvLogId);
+
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return entry;
@@ -53,7 +69,7 @@ namespace TeamViewerLogReader.Data.Repositories
                 {
                     if (reader.Read())
                     {
-                        return (reader.IsDBNull(0)) ? false : reader.GetInt32(0) > 0;                        
+                        return (reader.IsDBNull(0)) ? false : reader.GetInt32(0) > 0;
                     }
                 }
             }
