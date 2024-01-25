@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="ClickHouse.Ado" Version="2.0.2.2" />
+    <PackageReference Include="Polly" Version="8.2.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 

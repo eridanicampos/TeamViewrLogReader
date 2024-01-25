@@ -58,7 +58,7 @@ public class Program
         services.AddTransient<IUserTvLogBusiness, UserTvLogBusiness>();
         services.AddTransient<IUserTvLogRepository, UserTvLogRepository>();
         services.AddTransient<ILoggerService, NLogService>();
-
+        services.AddTransient<IClickHouseAsyncRepository, ClickHouseAsyncRepository>();
         services.AddTransient<LogMonitor>();
     }
         

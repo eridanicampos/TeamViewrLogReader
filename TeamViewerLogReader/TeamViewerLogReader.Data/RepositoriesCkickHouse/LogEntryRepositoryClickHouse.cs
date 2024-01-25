@@ -7,40 +7,25 @@ namespace TeamViewerLogReader.Data.Repositories
 {
     public class LogEntryRepositoryClickHouse : ILogEntryRepositoryClickHouse
     {
+        private readonly IClickHouseAsyncRepository _clickHouseAsyncRepository;
         private readonly ClickHouseDataContext _context;
-
-        public LogEntryRepositoryClickHouse(ClickHouseDataContext context)
+        private int count = 0;
+        public LogEntryRepositoryClickHouse(ClickHouseDataContext context, IClickHouseAsyncRepository clickHouseAsyncRepository)
         {
             _context = context;
+            _clickHouseAsyncRepository = clickHouseAsyncRepository;
         }
 
         public TeamViewerLogEntry AddLogEntry(TeamViewerLogEntry entry)
         {
             try
             {
-                var message = entry.Message.Replace("'", "\'");
+                var message = entry.Message.Replace("'", "''");
 
                 string query = @$"INSERT INTO cyberenergia_dev.teamViewerLogEntry (timestamp, processId, threadId, logLevel, message, userTvLogId) 
                            VALUES (toDate('{entry.Timestamp}'), {entry.ProcessId}, {entry.ThreadId}, '{entry.LogLevel}', '{message}', '{entry.UserTvLogId}');";
 
-                //string query = @"INSERT INTO cyberenergia_dev.teamViewerLogEntry 
-                //     (timestamp, processId, threadId, logLevel, message, userTvLogId) 
-                //     VALUES (toDate('@Timestamp'), @ProcessId, @ThreadId, @LogLevel, @Message, @UserTvLogId);";
-
-
-
-                using (var command = new ClickHouseCommand(_context.Connection, query))
-                {
-                    //command.Parameters.Add("@Timestamp", entry.Timestamp);
-                    //command.Parameters.Add("@ProcessId", entry.ProcessId);
-                    //command.Parameters.Add("@ThreadId", entry.ThreadId);
-                    //command.Parameters.Add("@LogLevel", entry.LogLevel);
-                    //command.Parameters.Add("@Message", entry.Message);
-                    //command.Parameters.Add("@UserTvLogId", entry.UserTvLogId);
-
-                    command.ExecuteNonQuery();
-                }
-
+                _clickHouseAsyncRepository.ExecuteQueryAsync(query, reader => {});
             }
             catch (Exception ex)
             {
@@ -60,21 +45,25 @@ namespace TeamViewerLogReader.Data.Repositories
 
         public bool LogEntryExists(TeamViewerLogEntry entry)
         {
-            string query = @$"SELECT COUNT(1) FROM cyberenergia_dev.teamViewerLogEntry
-                 WHERE timestamp = toDate('{entry.Timestamp}') AND message = '{entry.Message}';";
-
-            using (var command = new ClickHouseCommand(_context.Connection, query))
+            try
             {
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return (reader.IsDBNull(0)) ? false : reader.GetInt32(0) > 0;
-                    }
-                }
-            }
+                int existCount = 0;
 
-            return false;
+                var message = entry.Message.Replace("'", "''");
+                string query = @$"SELECT COUNT(1) FROM cyberenergia_dev.teamViewerLogEntry
+                 WHERE timestamp = toDate('{entry.Timestamp}') AND message = '{message}';";
+
+                _clickHouseAsyncRepository.ExecuteQueryAsync(query, reader =>
+                {
+                    existCount = int.Parse(reader.GetString(0));                       
+                });
+                return existCount == 0 ? false : true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }
